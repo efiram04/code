@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "WeatherInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model MyWeatherForecast.Models.WeatherInformation
+@{
+    int count = 0;
+    //var myList = Model.Weath.GroupBy(x => x.Season);
+}
+
+@using (Html.BeginForm("WeatherInfo", "Weather"))
+{
+    @*@Html.TextBoxFor(m => m.Location, new { placeholder = "London, GB" })
+        @Html.TextBoxFor(m => m.NumberOfDays, new { placeholder = "4" })*@
+    <input type="text" name="Location" placeholder="London,GB"/>
+        <input type="text" name="NumberOfDays" placeholder="(Max of 5 days)"  />
+    <input type="submit" value="Find" id="btnSubmit" />
+}
+
+
+
+
+
+
+
+<h2>WeatherInfo</h2>
+
+@*<input type="text" name="Location"  />
+    <input type="text" name="NumberOfDays"  />*@
+
+<ul>
+    @foreach (var i in Model.Weath)
+    {
+    <li style="background: blue; color: white;">
+        @*<p>@i.DateTimeStamp.DayOfWeek,@i.DateTimeStamp.Day</p>*@
+        <p>@i.TransformedDate</p>
+        @foreach (var u in i.DayWeatherInfo)
+        {
+            <img src="~/Content/Icons/@u.icon" />
+            <p>@count : @u.description</p>
+            count++;
+}
+        <p>@i.DayTemperatureInfo.CTemperature</p>
+        <p>@i.DayTemperatureInfo.FTemperature</p>
+    </li>
+
+    }
+</ul>
+
+

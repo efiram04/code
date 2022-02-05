@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MyWeatherForecast.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="baseUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://api.openweathermap.org/data/2.5/</Value>
+    </Setting>
+    <Setting Name="subUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">forecast?q=</Value>
+    </Setting>
+    <Setting Name="apiKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0037a205884c254c3fe1eb531093170a</Value>
+    </Setting>
+    <Setting Name="t" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+  </Settings>
+</SettingsFile>
