@@ -10,17 +10,15 @@
 }
 
 
-@*<h2>WeatherInfo</h2>*@
 
 @using (Html.BeginForm("WeatherInfo", "Weather"))
 {
-    @*@Html.TextBoxFor(m => m.Location, new { placeholder = "London, GB" })
-        @Html.TextBoxFor(m => m.NumberOfDays, new { placeholder = "4" })*@
+    
     <div class="form-group">
         Target Location:
-        <input type="text" required id="Location" name="Location" placeholder="London,GB" />
+        <input type="text"  required id="Location" name="Location" placeholder="London,GB" />
         Number of Days:
-        <input type="text" pattern="[0-5]" required id="NumberOfDays" name="NumberOfDays" placeholder="(Max of 5 days)" />
+        <input type="text"  pattern="[0-5]" required id="NumberOfDays" name="NumberOfDays" placeholder="(Max of 5 days)" />
         <input type="submit" value="Find" id="btnSubmit" />
     </div>
     
@@ -30,34 +28,35 @@
 {
     string classContainer = "weathercontainer" + Model.Weath.Count();
     
-    <div class="@classContainer">
-        @foreach (var i in Model.Weath)
-        {
-            string wInfoCont = "wInfo" + @count.ToString();
-            <div class="day-weather">
-                @*<p>@i.DateTimeStamp.DayOfWeek,@i.DateTimeStamp.Day</p>*@
-                <p>@i.TransformedDate</p>
-                @foreach (var u in i.DayWeatherInfo)
+<div class="@classContainer">
+    <h3>Weather Forecast for: @Model.Location</h3>
+    @foreach (var i in Model.Weath)
+    {
+        string wInfoCont = "wInfo" + @count.ToString();
+        <div class="day-weather">
+
+            <p>@i.TransformedDate</p>
+            @foreach (var u in i.DayWeatherInfo)
+            {
+                if (u.main.Contains("clouds") || u.main.Contains("shower"))
                 {
-                    if (u.main.Contains("clouds") || u.main.Contains("shower"))
-                    {
-                        bgClass = u.main;
-                    }
-                    else
-                    {
-                        bgClass = u.description;
-                    }
-                    <div id="@wInfoCont" class="@bgClass">
-                        <img src="~/Content/Icons/@u.icon" />
-                        <p class="description">@u.description</p>
-                    </div>
-                    count++;
+                    bgClass = u.main;
                 }
-                <p class="c-temp">@i.DayTemperatureInfo.CTemperature°C</p>
-                <p class="f-temp">@i.DayTemperatureInfo.FTemperature°F</p>
-            </div>
-        }
-    </div>
+                else
+                {
+                    bgClass = u.description;
+                }
+                <div id="@wInfoCont" class="@bgClass">
+                    <img src="~/Content/Icons/@u.icon" />
+                    <p class="description">@u.description</p>
+                </div>
+                count++;
+            }
+            <p class="c-temp">@i.DayTemperatureInfo.CTemperature°C</p>
+            <p class="f-temp">@i.DayTemperatureInfo.FTemperature°F</p>
+        </div>
+    }
+</div>
 }
 else
 {

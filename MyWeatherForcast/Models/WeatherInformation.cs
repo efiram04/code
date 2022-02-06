@@ -10,7 +10,6 @@ namespace MyWeatherForecast.Models
     {
         [JsonProperty("list")]
         public List<WeatherData> Weath { get; set; }
-        
     }
     public class WeatherData
     {
@@ -64,7 +63,6 @@ namespace MyWeatherForecast.Models
 
             return transformedDate;
         }
-
     }
     public class DayWeather
     {

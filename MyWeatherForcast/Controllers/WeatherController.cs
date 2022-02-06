@@ -36,14 +36,23 @@ namespace MyWeatherForecast.Controllers
             var numberOfDays = weatherInformation.NumberOfDays;
             if (string.IsNullOrEmpty(location) || numberOfDays <= 0)
             {
-                RedirectToAction("Error");
+                return View("Error");
             }
             else
             {
                 var t = await GetWeather(location, (numberOfDays > 0 ? numberOfDays : 1));
-                return View(t);
+                if(t.Weath == null)
+                {
+                    return View("Error");
+                }
+                else
+                {
+                    t.Location = location;
+                    t.NumberOfDays = numberOfDays;
+                    return View(t);
+                }
             }
-            return View();
+            //return View();
         }
 
         public async Task<WeatherInformation> GetWeather(string loc, int numberOfDays)
@@ -76,7 +85,7 @@ namespace MyWeatherForecast.Controllers
                         }
                         else
                         {
-                            RedirectToAction("Error");
+                            return weatherList;
                         }
                         //returning the weather list to view
                     }
