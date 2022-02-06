@@ -26,8 +26,10 @@ namespace MyWeatherForecast.Controllers
         [HttpGet]
         public ActionResult WeatherInfo()
         {
-            //var t = await GetWeather("London", 1);
-            return View();
+            WeatherInformation weatherList = new WeatherInformation();
+            weatherList.Location = "";
+            
+            return View(weatherList);
         }
         [HttpPost]
         public async Task<ActionResult> WeatherInfo(WeatherInformation weatherInformation)
