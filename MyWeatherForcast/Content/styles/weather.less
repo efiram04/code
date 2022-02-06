@@ -1,0 +1,97 @@
+﻿@import "fonts";
+
+body {
+    font-size: 15px;
+    font-family: RobotoCondensed-Regular;
+
+    .form-group {
+        padding: 50px 0;
+        text-align:center;
+    }
+
+    [class*="weathercontainer"] {
+        padding: 30px 0;
+
+        > .day-weather {
+            display: inline-block;
+            text-align: center;
+        }
+    }
+
+    .weathercontainer1 {
+        .day-weather {
+            width: 100%;
+        }
+    }
+
+    .weathercontainer2 {
+        > .day-weather {
+            width: 49%;
+        }
+    }
+
+    .weathercontainer3 {
+        > .day-weather {
+            width: 32.3333%;
+        }
+    }
+
+    .weathercontainer4 {
+        > .day-weather {
+            width: 24%;
+        }
+    }
+
+    .container5 {
+        > .day-weather {
+            width: 19%;
+        }
+    }
+
+    .day-weather {
+        padding: 20px 0;
+        text-transform: capitalize;
+        background-image: linear-gradient(#ffdb4e, #ff9872);
+
+        .description {
+            text-transform: uppercase;
+            font-family: RobotoCondensed-Bold;
+        }
+
+        .c-temp {
+            font-size: 30px;
+        }
+
+        &.clearsky {
+            background-image: linear-gradient(#ffdb4e, #ff9872);
+        }
+
+        &.fewclouds {
+            background-image: linear-gradient(#03B9A5, #30ECEB);
+        }
+
+        &.scatteredclouds, &.brokenclouds, &.overcastclouds {
+            background-image: linear-gradient(#3E93B2, #44EDEC);
+        }
+
+        &.showerrain {
+            background-image: linear-gradient(#066E94, #6fd4fb);
+        }
+
+        &.rain {
+            background-image: linear-gradient(#24A0CD, #6fd4fb);
+        }
+
+        &.thunderstorm {
+            background-image: linear-gradient(#0A465D, #61A1BA);
+        }
+
+        &.snow {
+            background-image: linear-gradient(#74A3DE, #DCEDF4);
+        }
+
+        &.mist {
+            background-image: linear-gradient(#919494, #D6D8D9);
+        }
+    }
+}

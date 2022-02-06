@@ -5,47 +5,63 @@
 }
 @model MyWeatherForecast.Models.WeatherInformation
 @{
-    int count = 0;
-    //var myList = Model.Weath.GroupBy(x => x.Season);
+    int count = 1;
+    string bgClass = "";
 }
+
+
+@*<h2>WeatherInfo</h2>*@
 
 @using (Html.BeginForm("WeatherInfo", "Weather"))
 {
     @*@Html.TextBoxFor(m => m.Location, new { placeholder = "London, GB" })
         @Html.TextBoxFor(m => m.NumberOfDays, new { placeholder = "4" })*@
-    <input type="text" name="Location" placeholder="London,GB"/>
-        <input type="text" name="NumberOfDays" placeholder="(Max of 5 days)"  />
-    <input type="submit" value="Find" id="btnSubmit" />
+    <div class="form-group">
+        Target Location:
+        <input type="text" required id="Location" name="Location" placeholder="London,GB" />
+        Number of Days:
+        <input type="text" pattern="[0-5]" required id="NumberOfDays" name="NumberOfDays" placeholder="(Max of 5 days)" />
+        <input type="submit" value="Find" id="btnSubmit" />
+    </div>
+    
 }
 
-
-
-
-
-
-
-<h2>WeatherInfo</h2>
-
-@*<input type="text" name="Location"  />
-    <input type="text" name="NumberOfDays"  />*@
-
-<ul>
-    @foreach (var i in Model.Weath)
-    {
-    <li style="background: blue; color: white;">
-        @*<p>@i.DateTimeStamp.DayOfWeek,@i.DateTimeStamp.Day</p>*@
-        <p>@i.TransformedDate</p>
-        @foreach (var u in i.DayWeatherInfo)
+@if (Model != null)
+{
+    string classContainer = "weathercontainer" + Model.Weath.Count();
+    
+    <div class="@classContainer">
+        @foreach (var i in Model.Weath)
         {
-            <img src="~/Content/Icons/@u.icon" />
-            <p>@count : @u.description</p>
-            count++;
+            string wInfoCont = "wInfo" + @count.ToString();
+            <div class="day-weather">
+                @*<p>@i.DateTimeStamp.DayOfWeek,@i.DateTimeStamp.Day</p>*@
+                <p>@i.TransformedDate</p>
+                @foreach (var u in i.DayWeatherInfo)
+                {
+                    if (u.main.Contains("clouds") || u.main.Contains("shower"))
+                    {
+                        bgClass = u.main;
+                    }
+                    else
+                    {
+                        bgClass = u.description;
+                    }
+                    <div id="@wInfoCont" class="@bgClass">
+                        <img src="~/Content/Icons/@u.icon" />
+                        <p class="description">@u.description</p>
+                    </div>
+                    count++;
+                }
+                <p class="c-temp">@i.DayTemperatureInfo.CTemperature°C</p>
+                <p class="f-temp">@i.DayTemperatureInfo.FTemperature°F</p>
+            </div>
+        }
+    </div>
 }
-        <p>@i.DayTemperatureInfo.CTemperature</p>
-        <p>@i.DayTemperatureInfo.FTemperature</p>
-    </li>
-
-    }
-</ul>
+else
+{
+    <center>Know weather information.</center>
+}
 
 

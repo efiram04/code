@@ -9,7 +9,6 @@ namespace MyWeatherForecast.Models
     public class WeatherInformation : UserInput
     {
         [JsonProperty("list")]
-        //public IEnumerable<WeatherData> Weath { get; set; }
         public List<WeatherData> Weath { get; set; }
         
     }
@@ -21,7 +20,6 @@ namespace MyWeatherForecast.Models
         public List<DayWeather> DayWeatherInfo { get; set; }
         [JsonProperty("main")]
         public TempDetails DayTemperatureInfo { get; set; }
-
         public DateTime dateformatted { 
             get 
             {
@@ -42,16 +40,12 @@ namespace MyWeatherForecast.Models
             }
 
             int day = dtStamp.Day;
-            // Start with the most common extension.
             string extension = "th";
 
-            // Examine the last 2 digits.
             int last_digits = day % 100;
 
-            // If the last digits are 11, 12, or 13, use th. Otherwise:
             if (last_digits < 11 || last_digits > 13)
             {
-                // Check the last digit.
                 switch (last_digits % 10)
                 {
                     case 1:
